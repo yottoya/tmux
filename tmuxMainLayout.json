@@ -1,0 +1,111 @@
+{
+  "sessions": [
+    {
+      "project_Name": "My Python and React Project",
+      "projects_default_path": "$HOME/Downloads/",
+      "session_name": "mainSession1",
+      "windows": [
+        {
+          "window_name": "pythonBackend",
+          "window_pane_splits": ["H"],
+          "window_pane_settings": [
+            {
+              "pane_resize_axis": "y",
+              "pane_size": 70,
+              "pane_command": ["nvim"]
+            },
+            {
+              "pane_size": null,
+              "pane_command": [
+                "python3 -m venv .venv",
+                "source .venv/bin/activate",
+                "echo 'This finally parses multiple arguments!'"
+              ]
+            }
+          ]
+        },
+        {
+          "window_name": "reactFrontend",
+          "window_pane_splits": ["H", "V"],
+          "window_pane_settings": [
+            {
+              "pane_resize_axis": "y",
+              "pane_size": 70,
+              "pane_command": ""
+            },
+            {
+              "pane_resize_axis": "x",
+              "pane_size": 30,
+              "pane_command": ["npm create vite@latest"]
+            },
+            {
+              "pane_size": null,
+              "pane_command": ["echo 'It worked!'"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "project_Name": "2ndSessionProject",
+      "projects_default_path": "$HOME/Downloads/",
+      "session_name": "mainSession2",
+      "windows": [
+        {
+          "window_name": "pythonBackend",
+          "window_pane_splits": ["H", "V"],
+          "window_pane_settings": [
+            {
+              "pane_size": 70,
+              "pane_command": ["nvim"]
+            },
+            {
+              "pane_size": 30,
+              "pane_command": [
+                "python3 -m venv .venv",
+                "source .venv/bin/activate"
+              ]
+            }
+          ]
+        },
+        {
+          "window_name": "reactFrontend",
+          "window_pane_splits": ["H", "V"],
+          "window_pane_settings": [
+            {
+              "pane_resize_axis": "y",
+              "pane_size": 70,
+              "pane_command": ""
+            },
+            {
+              "pane_resize_axis": "y",
+              "pane_size": 30,
+              "pane_command": ["npm create vite@latest"]
+            }
+          ]
+        },
+        {
+          "window_name": "ThirdTest",
+          "window_pane_splits": ["H", "V"],
+          "window_pane_settings": [
+            {
+              "pane_size": 70,
+              "pane_command": ["nvim"]
+            },
+            {
+              "pane_size": 30,
+              "pane_command": [
+                "python3 -m venv .venv",
+                "source .venv/bin/activate"
+              ]
+            },
+            {
+              "pane_size": null,
+              "pane_command": ["echo 'It worked!'"]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

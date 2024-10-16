@@ -1,0 +1,111 @@
+unbind r
+bind r source-file ~/.tmux.conf
+
+## Set the position of the TMUX status at the TOP
+set -g status-position top
+
+# Mouse Settings | MacOS ONLY:
+set -g mouse on
+bind -n WheelUpPane if-shell -F -t = "#{mouse_any_flag}" "send-keys -M" "if -Ft= '#{pane_in_mode}' 'send-keys -M' 'select-pane -t=; copy-mode -e; send-keys -M'"
+bind -n WheelDownPane select-pane -t= \; send-keys -M
+bind -n C-WheelUpPane select-pane -t= \; copy-mode -e \; send-keys -M
+bind -T copy-mode-vi    C-WheelUpPane   send-keys -X halfpage-up
+bind -T copy-mode-vi    C-WheelDownPane send-keys -X halfpage-down
+bind -T copy-mode-emacs C-WheelUpPane   send-keys -X halfpage-up
+bind -T copy-mode-emacs C-WheelDownPane send-keys -X halfpage-down
+
+# To copy, left click and drag to highlight text in yellow, 
+# once you release left click yellow text will disappear and will automatically be available in clibboard
+
+# Use vim keybindings in copy mode, such as: "setw -g mode-keys vi"
+# Update default binding of `Enter` to also use copy-pipe
+unbind -T copy-mode-vi Enter
+bind-key -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "pbcopy"
+bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel "pbcopy"
+
+# Add "alt + backspace" for deleting words quicker in terminal
+# bind-key -n M-Backspace send-key C-Backspace
+
+# Set Prefix key to "ctrl + s"
+set -g prefix C-s
+
+# Vim Motions
+setw -g mode-keys vi
+bind-key h select-pane -L
+bind-key j select-pane -D
+bind-key k select-pane -U
+bind-key l select-pane -R
+
+# Start windows and panes at 1, not 0
+set -g base-index 1
+set -g pane-base-index 1
+set-window-option -g pane-base-index 1
+set-option -g renumber-windows on
+
+# Always create an intial "Dummy" session so that sessions
+# I create start with index 1 and onward
+new-session -d -s dummy
+
+## List of plugins
+set -g @plugin 'tmux-plugins/tmux-sensible'
+set -g @plugin 'christoomey/vim-tmux-navigator'
+set -g @plugin 'tmux-plugins/tmux-resurrect'
+set -g @plugin 'omerxx/tmux-sessionx'
+
+# Themes
+### Tokyonight - 1
+# set -g @plugin 'theutz/tmux-tokyonight-nvim'
+# set -g @tokyonight 'storm'
+
+### Tokyonight - 2
+set -g @plugin 'fabioluciano/tmux-tokyo-night'
+### Configuration
+set -g @theme_variation 'storm'
+set -g @theme_left_separator ''   # '' ''
+set -g @theme_right_separator ''  # '' ''
+set -g @theme_plugins 'datetime,weather,playerctl,yay'
+
+### Dracula
+# set -g @plugin 'dracula/tmux'
+# set -g @dracula-show-powerline true
+# set -g @dracula-fixed-location "Jotland"
+# set -g @dracula-plugins "Weather"
+# set -g @dracula-show-flags true
+# set -g @dracula-show-left-icon session
+
+### Catppuccin
+# set -g @plugin 'catppuccin/tmux'
+# set -g @catppuccin_flavour 'mocha'
+
+# set -g @catppuccin_window_left_separator "█"
+# set -g @catppuccin_window_right_separator "█ "
+# set -g @catppuccin_window_number_position "right"
+# set -g @catppuccin_window_middle_separator "  █"
+
+# set -g @catppuccin_window_default_fill "number"
+
+# set -g @catppuccin_window_current_fill "number"
+# set -g @catppuccin_window_current_text "#{pane_current_path}"
+
+# set -g @catppuccin_status_modules_right "application session date_time"
+# set -g @catppuccin_status_left_separator  ""
+# set -g @catppuccin_status_right_separator " "
+# set -g @catppuccin_status_fill "all"
+# set -g @catppuccin_status_connect_separator "yes"
+
+# set -g status-right '#{?client_prefix,#[fg=colour235]#[bg=colour27],#[fg=colour235]#[bg=colour235]}'
+# set -g status-left '#{?client_prefix,#[fg=colour235]#[bg=colour27],#[fg=colour235]#[bg=colour235]}'
+
+## TPM Plugin Manager 
+## (IDK if adding this to the top would mean that the plugins don't load...
+## so I decided to add it to the bottom just incase)
+set -g @plugin 'tmux-plugins/tpm'
+# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+run '~/.tmux/plugins/tpm/tpm'
+
+
+# Resize panes with leader key and Alt + Arrow keys
+bind-key -r C-s M-Up resize-pane -U 5
+bind-key -r C-s M-Down resize-pane -D 5
+bind-key -r C-s M-Left resize-pane -L 5
+bind-key -r C-s M-Right resize-pane -R 5
